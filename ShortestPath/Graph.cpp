@@ -1,7 +1,7 @@
 #include "Graph.hpp"
 
 //#define infin 2071690107
-#define infin 9999
+#define infin 999
 
 // The ctor should read, parse, and build the graph from the given fileName
 Graph::Graph(std::string fileName)
@@ -11,10 +11,10 @@ Graph::Graph(std::string fileName)
 	P = new int[SIZE][COL];
 
 	fillG();
-	fillP();
 	
+
 	file_to_graph(fileName);
-	
+
 	//printG();
 	//printV();
 
@@ -37,6 +37,8 @@ Graph::~Graph(void)
 // When index == 1, return the first, index == 2, return the second, etc.
 int Graph::shortestPath(int index)
 {
+	fillP();
+
 	//get start & ends
 	int start = startV[index - 1];
 	int end = endV[index - 1];
@@ -44,8 +46,7 @@ int Graph::shortestPath(int index)
 	P[start][1] = 0;
 	P[start][2] = 1;
 
-	fillP();
-	return build_path(start, end, 0, 1);
+	return build_path(start, end);;
 }
 
 void Graph::file_to_graph(string fileName)
@@ -114,12 +115,28 @@ void Graph::fillP()
 	}
 }
 
-int Graph::build_path(int curr_vert, int end, int dist,  int count)
-{
-	if (P[end][2] == infin)
-	{
-		int temp_dist;
+//int Graph::MyshortestPath(int index)
+//{
+//	//get start & ends
+//	int start = startV[index - 1];
+//	int end = endV[index - 1];
+//
+//	P[start][1] = 0;
+//	P[start][2] = 1;
+//
+//	//cout << "THE SHORTEST PATH " << build_path(start, end) << endl;
+//	return build_path(start, end);
+//}
 
+
+int Graph::build_path(int start, int end)
+{
+	int curr_vert = start;
+	int dist = 0;
+	int temp_dist;
+
+	while (P[end][2] == infin)
+	{
 		for(int x = 0; x < SIZE;x++)
 		{
 			if(G[curr_vert][x] != infin)
@@ -135,13 +152,14 @@ int Graph::build_path(int curr_vert, int end, int dist,  int count)
 				}
 			}
 		}
+
 		cout << endl;
 
 		int shortestDistIndex = 0;
 
-		for(int y = 0; y < SIZE; y++)
+		for(int y = 1; y < SIZE; y++)
 		{
-			if(P[y][0] < P[shortestDistIndex][0] && P[y][2] == infin)
+			if(P[y][0] <= P[shortestDistIndex][0] && P[y][2] == infin)
 			{
 				shortestDistIndex = y;
 			}
@@ -149,27 +167,16 @@ int Graph::build_path(int curr_vert, int end, int dist,  int count)
 
 		//set permanent
 		P[shortestDistIndex][1] = P[shortestDistIndex][0];
-		P[shortestDistIndex][2] = count + 1;
+		P[shortestDistIndex][2] = 0;
+		
+		//printP();
 
-		build_path(shortestDistIndex, end, P[shortestDistIndex][1], P[shortestDistIndex][2]);
+		curr_vert = shortestDistIndex;
+		dist = temp_dist;
 	}
-	else
-	{
-		return P[end][1];
-	}
+
+	return P[end][1];
 };
-
-//int Graph::MyshortestPath(int index)
-//{
-//	//get start & ends
-//	int start = startV[index - 1];
-//	int end = endV[index - 1];
-//
-//	P[start][1] = 0;
-//	P[start][2] = 1;
-//
-//	return build_path(start, end, 0, 1);
-//}
 
 
 void Graph::printG()
@@ -196,6 +203,7 @@ void Graph::printP()
 {
 	for(int y = 0; y < SIZE; y++)
 	{
+		cout << "v" << y << " -- ";
 		for(int x = 0; x < COL; x++)
 		{
 			cout << P[y][x] << " ";

@@ -1,7 +1,7 @@
 #include "CS3 Framework\gtest.h"
 #include "Graph.hpp"
 
-TEST(Graph, 10Nodes)
+TEST(Graph,  DISABLED_10Nodes)
 {
   Graph* pGraph = new Graph("Graphs/graph10.txt");
   
@@ -16,7 +16,7 @@ TEST(Graph, 10Nodes)
 
 // Remove DISABLED_ when you are ready for this test to run
 // !!This test must pass!!
-TEST(Graph, DISABLED_100Nodes)
+TEST(Graph, 100Nodes)
 {
   Graph* pGraph = new Graph("Graphs/graph100.txt");
   

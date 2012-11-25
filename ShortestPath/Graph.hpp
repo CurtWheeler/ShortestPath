@@ -28,13 +28,11 @@ class Graph
 	  vector<int> startV;
 	  vector<int> endV;
 	  vector<int> posV;
-	  vector<int> pathV;
-	  vector<int> pathW;
 
 	  void fillG();
 	  void fillP();
 	  void file_to_graph(string);
-	  int build_path(int, int, int, int);
+	  int build_path(int, int);
 };
 
 #endif // _GRAPH_HPP
