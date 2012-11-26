@@ -78,12 +78,14 @@
     <ClCompile Include="CS3 Framework\MemoryList.cpp" />
     <ClCompile Include="CS3 Framework\tester.cpp" />
     <ClCompile Include="Graph.cpp" />
+    <ClCompile Include="PriorityQueue.cpp" />
     <ClCompile Include="testGraph.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CS3 Framework\gtest.h" />
     <ClInclude Include="CS3 Framework\MemoryList.hpp" />
     <ClInclude Include="Graph.hpp" />
+    <ClInclude Include="PriorityQueue.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

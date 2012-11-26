@@ -16,6 +16,9 @@
     <ClCompile Include="testGraph.cpp">
       <Filter>ShortestPath</Filter>
     </ClCompile>
+    <ClCompile Include="PriorityQueue.cpp">
+      <Filter>ShortestPath</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CS3 Framework\gtest.h">
@@ -25,6 +28,9 @@
       <Filter>CS3 Framework</Filter>
     </ClInclude>
     <ClInclude Include="Graph.hpp">
+      <Filter>ShortestPath</Filter>
+    </ClInclude>
+    <ClInclude Include="PriorityQueue.hpp">
       <Filter>ShortestPath</Filter>
     </ClInclude>
   </ItemGroup>
