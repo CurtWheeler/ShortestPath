@@ -22,7 +22,7 @@ class Graph
 	void printP();
 
   private:
-	  static int const SIZE = 100;
+	  static int const SIZE = 10000;
 	  static int const COL = 3;
 	  int (*G)[SIZE];
 	  int (*P)[COL];
@@ -33,7 +33,7 @@ class Graph
 	  void fillG();
 	  void fillP();
 	  void file_to_graph(string);
-	  int build_path(int, int);
+	  int build_path(int, int, int, int);
 };
 
 #endif // _GRAPH_HPP

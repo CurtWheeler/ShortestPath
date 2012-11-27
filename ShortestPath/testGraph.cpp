@@ -16,7 +16,7 @@ TEST(Graph, DISABLED_10Nodes)
 
 // Remove DISABLED_ when you are ready for this test to run
 // !!This test must pass!!
-TEST(Graph, 100Nodes)
+TEST(Graph, DISABLED_100Nodes)
 {
   Graph* pGraph = new Graph("Graphs/graph100.txt");
   
@@ -46,7 +46,7 @@ TEST(Graph, DISABLED_1000Nodes)
 
 // Remove DISABLED_ when you are ready for this test to run
 // !!This test doesn't have to run!!
-TEST(Graph, DISABLED_10000Nodes)
+TEST(Graph, 10000Nodes)
 {
   Graph* pGraph = new Graph("Graphs/graph10000.txt");
   

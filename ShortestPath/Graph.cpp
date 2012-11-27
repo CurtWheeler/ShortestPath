@@ -18,7 +18,7 @@ Graph::Graph(std::string fileName)
 	//printG();
 	//printV();
 
-	MyshortestPath(1);
+	//MyshortestPath(1);
 }
 
 // Clean up your memory
@@ -37,14 +37,16 @@ int Graph::shortestPath(int index)
 	fillP();
 
 	//get start & ends
-	//int start = startV[index - 1];
-	//int end = endV[index - 1];
+	int start = startV[index - 1];
+	int end = endV[index - 1];
 
-	//P[start][1] = 0;
-	//P[start][2] = 1;
+	P[start][1] = 0;
+	P[start][2] = 1;
 
-	//return build_path(start, end);
-	return 0;
+	//cout << "THE SHORTEST PATH " << build_path(start, end) << endl;
+	int dist = build_path(start, end, 0, 1);
+	//printP();
+	return dist;
 }
 
 void Graph::file_to_graph(string fileName)
@@ -91,7 +93,7 @@ void Graph::file_to_graph(string fileName)
 		cout << "Unable to open file"; 
 	}
 
-	cout << "GRAPH IS FULL-------------------------------" << endl;
+	//cout << "GRAPH IS FULL-------------------------------" << endl;
 	//printG();
 };
 
@@ -129,13 +131,70 @@ int Graph::MyshortestPath(int index)
 	P[start][2] = 1;
 
 	//cout << "THE SHORTEST PATH " << build_path(start, end) << endl;
-	return build_path(start, end);
+	return build_path(start, end, 0, 1);
 }
 
-int Graph::build_path(int start, int end)
+int Graph::build_path(int start, int end, int dist, int count)
 {
+	if(start == end)
+	{
+		return P[end][1];
+	}
+	else
+	{
+		//get possibles
+		int weight;
+		for(int v = 0; v < SIZE; v++)
+		{
+			if(G[start][v] != infin)
+			{
+				if(P[v][2] == infin)
+				{
+					weight = G[start][v];
+					P[v][0] = (dist + weight);
+					posV.push_back(v);
+					//cout << "pos " << v << " W " << weight << endl;
+				}
+			}
+		}
 
+		//find smallest
+		int smallest = infin;
+		int vertex = 0;
+		int smallestVertex = 0;
+		for(int v = 0; v < posV.size(); v++)
+		{
+			vertex = posV[v];
+			weight = P[vertex][0];
+			//cout << "vertex " << vertex << " weight " << weight << endl;
+
+			if(weight <= smallest && P[vertex][2] != 1)
+			{
+				smallest = weight;
+				smallestVertex = vertex;
+			}
+		}
+
+		//set permanent
+		P[smallestVertex][1] = smallest;
+		P[smallestVertex][2] = count + 1;
+
+		//remove from possibles
+		for(int i = 0; i < posV.size(); i++)
+		{
+			if(posV[i] == smallestVertex)
+			{
+				posV.erase(posV.begin()+i);
+			}
+		}
+
+		//printP();
+		//cout << "CURRENT DIST " << smallest << " @VERTEX " << smallestVertex << endl;
+		build_path(smallestVertex, end, smallest, count + 1);
+	}
 };
+
+
 
 void Graph::printG()
 {
